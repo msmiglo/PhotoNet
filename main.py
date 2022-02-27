@@ -1,11 +1,19 @@
 
-from lib import glob
 from lib.application import Application
 from lib.system import System
 
 
 def main():
-    pass
+    system = System.get_instance()
+    system.start()
+
+    app = Application()
+    app.start()
+
+    # waiting for application loop break
+
+    app.stop()
+    system.stop()
 
 
 if __name__ == "__main__":
