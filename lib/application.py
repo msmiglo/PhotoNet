@@ -1,11 +1,17 @@
 
+import json
+
 from lib.backend import Backend
 from lib.frontend import Frontend
 
 
+CONFIG_PATH = "./config/config.json"
+
+
 class Application:
     def __init__(self):
-        self.backend = Backend()
+        config = json.load(open(CONFIG_PATH))
+        self.backend = Backend(config)
         self.frontend = Frontend(self.backend)
 
     def start(self):

@@ -12,7 +12,7 @@ RESET_COLOR = "\033[0m"
 class Frontend:
     def __init__(self, backend):
         self.backend = backend
-        self.backend.register_handler(self.handle_in_message)
+        self.backend.register_handle_callback(self.handle_in_message)
         self.is_connected = False
 
     def start(self):
@@ -62,11 +62,11 @@ class Frontend:
 
     def handle_in_message(self, message):
         print(CHANGE_TO_BLUE + "They: " + message + RESET_COLOR, flush=True)
-        return "OK"
+        return "success"
 
     def handle_out_message(self, message):
-        answear = self.backend.send_out_message(message)
-        if answear == "OK":
+        response = self.backend.send_out_message(message)
+        if response == "success":
             print(CHANGE_TO_GREEN + "You: " + message + RESET_COLOR, flush=True)
         else:
             print(
